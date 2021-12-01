@@ -3,11 +3,12 @@
   (:require   [clojure.data.csv :as csv]
               [clojure.edn :as edn]))
 
+(declare count-increases input)
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "I will tell you the number of increases in that there input.txt file."
   []
-  (println "Hello, World!"))
+  (count-increases input))
 
 (def input-txt
   "input.txt")
