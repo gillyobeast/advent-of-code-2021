@@ -6,10 +6,6 @@
   []
   (println "Hello, World!"))
 
-(def test-input
-  "Test input with 3 increases."
-  [100 101 102 101 102 101 100])
-
   ;; todo: slurp the input.txt
   ;; todo: make -main do the thing
 
