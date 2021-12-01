@@ -1,12 +1,20 @@
 (ns advent-of-code-2021.core
-  (:gen-class))
+  (:gen-class)
+  (:require   [clojure.data.csv :as csv]
+              [clojure.edn :as edn]))
+
 
 (defn -main
   "I don't do a whole lot ... yet."
   []
   (println "Hello, World!"))
 
-  ;; todo: slurp the input.txt
+(def input-txt
+  "input.txt")
+
+(def input
+  (map edn/read-string (map first (csv/read-csv (slurp input-txt) :separator \n))))
+
   ;; todo: make -main do the thing
 
 ;; write a function that compares two depths, 
