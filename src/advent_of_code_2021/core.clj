@@ -10,6 +10,9 @@
   "Test input with 3 increases."
   [100 101 102 101 102 101 100])
 
+  ;; todo: slurp the input.txt
+  ;; todo: make -main do the thing
+
 ;; write a function that compares two depths, 
 ;;    and returns 1 if there is an increase
 ;; then reduce that function over the input with initial of 0
