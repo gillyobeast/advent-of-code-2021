@@ -13,3 +13,10 @@
 ;; write a function that compares two depths, 
 ;;    and returns 1 if there is an increase
 ;; then reduce that function over the input with initial of 0
+
+(defn compare-depths
+  "Compare two sonar depths, returning 1 if second is deeper than the first."
+  [first second]
+  (if (< first second)
+    1
+    0))
