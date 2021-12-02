@@ -8,20 +8,13 @@
 (defn -main
   "I will tell you the number of increases in that there input.txt file."
   []
-  (count-increases input))
+  (println (count-increases input)))
 
 (def input-txt
-  "input.txt")
+  "day-1.txt")
 
 (def input
   (map edn/read-string (map first (csv/read-csv (slurp input-txt) :separator \n))))
-
-  ;; todo: make -main do the thing
-
-;; write a function that compares two depths, 
-;;    and returns 1 if there is an increase
-;; then reduce that function over the input with initial of 0
-;;  nope, that's not gonna work - gotta apply it to each pair of the input.
 
 (defn count-window
   "Returns the sum over a window of three values."
