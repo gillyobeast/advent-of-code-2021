@@ -23,20 +23,29 @@
 ;; then reduce that function over the input with initial of 0
 ;;  nope, that's not gonna work - gotta apply it to each pair of the input.
 
+(defn count-window
+  "Returns the sum over a window of three values."
+  [[first second third]]
+  ;; (println first second third)
+  (+ first second third))
+
 (defn compare-depths
-  "Compare two sonar depths, returning 1 if second is deeper than the first."
+  "Compare two windows of sonar depths, returning 1 if second window is deeper than the first."
   [first second]
-  (if (< first second)
+  (if (< (count-window first) (count-window second))
     1
     0))
 
 (defn count-increases
-  "Counts the number of increases in list of depths."
+  "Counts the number of times consecutive windows of 3 depths increases in list of depths."
   [depths]
   (loop [count 0
          [first & rest] depths]
-    (if (empty? rest)
+    (if (nil? (nth rest 2 nil))
       count
       (recur
-       (+ count (compare-depths first (clojure.core/first rest)))
+       (let [window-1 (cons first (take 2 rest))
+             window-2 (take 3 rest)]
+         (println window-1 window-2 " - count" count)
+         (+ count (compare-depths window-1 window-2)))
        rest))))
