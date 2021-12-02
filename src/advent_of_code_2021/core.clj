@@ -45,7 +45,8 @@
       count
       (recur
        (let [window-1 (cons first (take 2 rest))
-             window-2 (take 3 rest)]
-         (println window-1 window-2 " - count" count)
-         (+ count (compare-depths window-1 window-2)))
+             window-2 (take 3 rest)
+             increase? (compare-depths window-1 window-2)]
+        ;;  (println window-1 window-2 " - increase?" increase? " - count" count)
+         (+ count increase?))
        rest))))
