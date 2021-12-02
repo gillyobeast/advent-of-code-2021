@@ -4,6 +4,14 @@
                                               compare-depths
                                               count-increases]]))
 
+
+
+
+
+;;
+;; Day 1
+;;
+
 (deftest count-window-test
   (testing "Returns the sum of three values"
     (is (= (count-window [100 101 102]) 303))))

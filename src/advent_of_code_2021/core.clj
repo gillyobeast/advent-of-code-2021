@@ -1,7 +1,6 @@
 (ns advent-of-code-2021.core
   (:gen-class)
-  (:require   [clojure.data.csv :as csv]
-              [clojure.edn :as edn]))
+  (:require   [clojure.data.csv :as csv]))
 
 (declare count-increases input)
 
@@ -11,10 +10,40 @@
   (println (count-increases input)))
 
 (def input-txt
-  "day-1.txt")
+  "day-2.txt")
 
 (def input
-  (map edn/read-string (map first (csv/read-csv (slurp input-txt) :separator \n))))
+  (csv/read-csv (slurp input-txt) :separator \ ))
+  ;;  todo: map the second value in input to an integer
+
+
+(def submarine
+  {:x 0 ; horizontal position
+   :y 0 ; depth
+   })
+
+
+(defn- move-sub-forward [sub distance]
+  {:x (+ (:x sub) distance)
+   :y (:y sub)})
+
+(defn- move-sub-down [sub distance]
+  {:x (:x sub)
+   :y (+ (:y sub) distance)})
+
+(defn move-sub
+  "Moves submarine sub distance units in direction direction. Duh."
+  [sub [direction distance]]
+  (case direction
+    "forward" (move-sub-forward sub distance)
+    "down" (move-sub-down sub distance)
+    "up" (move-sub-down sub (- distance))
+    sub))
+
+
+;; 
+;; Day 1 
+;;
 
 (defn count-window
   "Returns the sum over a window of three values."
