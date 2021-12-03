@@ -17,7 +17,12 @@
 ;;
 ;; Day 3
 ;;
-(def input (map first (csv/read-csv (slurp input-txt) :separator \n)))
+
+(defn input []
+  (map
+   #(Integer/parseInt % 2)
+   (map first
+        (csv/read-csv (slurp input-txt) :separator \n))))
 
 
 (defn gamma
