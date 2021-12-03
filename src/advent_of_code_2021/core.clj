@@ -12,14 +12,18 @@
 (def input-txt
   "day-2.txt")
 
+(defn parse-directions
+[[direction distance]]
+[(keyword direction) (read-string distance)])
+
 (def input
-  (csv/read-csv (slurp input-txt) :separator \ ))
+  (map parse-directions (csv/read-csv (slurp input-txt) :separator \ )))
   ;;  todo: map the second value in input to an integer
 
 
 (def submarine
   {:x 0 ; horizontal position
-   :y 0 ; depth
+   :y 0 ; depth below origin
    })
 
 
@@ -35,9 +39,9 @@
   "Moves submarine sub distance units in direction direction. Duh."
   [sub [direction distance]]
   (case direction
-    "forward" (move-sub-forward sub distance)
-    "down" (move-sub-down sub distance)
-    "up" (move-sub-down sub (- distance))
+    :forward (move-sub-forward sub distance)
+    :down (move-sub-down sub distance)
+    :up (move-sub-down sub (- distance))
     sub))
 
 
