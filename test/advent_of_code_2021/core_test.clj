@@ -8,28 +8,28 @@
 
 
 (def test-input-day-2
-  '([:forward 5]    ;; 5 0
-    [:down 5]       ;; 5 5
-    [:forward 8]    ;; 13 5
-    [:up 3]         ;; 13 2
-    [:down 8]       ;; 13 10
-    [:forward 2]))  ;; 15 10 
+  '([:forward 5]    ;; 5  0  0 
+    [:down 5]       ;; 5  5  5
+    [:forward 8]    ;; 13 45 5
+    [:up 3]         ;; 13 45 2
+    [:down 8]       ;; 13 45 10
+    [:forward 2]))  ;; 15 60 10 
 
 
 (deftest move-sub-test
   (testing "Moves the sub appropriately"
-    (is (= (move-sub submarine [:forward 5])
-           {:x 5 :y 0}))
+    (is (= (move-sub {:x 0 :y 0 :aim 1} [:forward 5])
+           {:x 5 :y 5 :aim 1}))
 
     (is (= (move-sub submarine [:down 5])
-           {:x 0 :y 5}))
+           {:x 0 :y 0 :aim 5}))
 
     (is (= (move-sub submarine [:up 2])
-           {:x 0 :y -2}))))
+           {:x 0 :y 0 :aim -2}))))
 
 (deftest follow-map-test
   (testing "Follows the test map to (15,10)"
-    (is (= (follow-map test-input-day-2 submarine) {:x 15 :y 10}))))
+    (is (= (follow-map test-input-day-2 submarine) {:x 15 :y 60 :aim 10}))))
 
 ;;
 ;; Day 1
