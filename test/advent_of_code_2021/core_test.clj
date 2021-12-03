@@ -1,11 +1,18 @@
 (ns advent-of-code-2021.core-test
   (:require [clojure.test :refer [deftest testing is]]
-            [advent-of-code-2021.core :refer [move-sub submarine follow-map
-                                              count-window
-                                              compare-depths
-                                              count-increases]]))
+            [advent-of-code-2021.core :refer [move-sub submarine follow-map ;; day 2
+                                              count-window compare-depths count-increases ;; day 1
+                                              ]]))
 
 
+;;
+;; Day 3
+;;
+
+
+;;
+;; Day 2
+;;
 
 (def test-input-day-2
   '([:forward 5]    ;; 5  0  0 

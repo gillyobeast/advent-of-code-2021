@@ -2,15 +2,27 @@
   (:gen-class)
   (:require   [clojure.data.csv :as csv]))
 
-(declare day-2-1-answer)
+
+(declare day-3-answer)
 
 (defn -main
-  "I will tell you the number of increases in that there input.txt file."
+  "I will tell you answer to today's puzzle."
   []
-  (println (day-2-1-answer)))
+  (println (day-3-answer)))
 
 (def input-txt
-  "day-2.txt")
+  "day-3.txt")
+
+
+;;
+;; Day 3
+;;
+
+
+;;
+;; Day 2
+;;
+
 
 (defn parse-directions
   [[direction distance]]
