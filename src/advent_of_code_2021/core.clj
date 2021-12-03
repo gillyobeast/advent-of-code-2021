@@ -18,7 +18,6 @@
 
 (def input
   (map parse-directions (csv/read-csv (slurp input-txt) :separator \ )))
-  ;;  todo: map the second value in input to an integer
 
 
 (def submarine

@@ -1,12 +1,35 @@
 (ns advent-of-code-2021.core-test
   (:require [clojure.test :refer [deftest testing is]]
-            [advent-of-code-2021.core :refer [count-window
+            [advent-of-code-2021.core :refer [move-sub submarine follow-map
+                                              count-window
                                               compare-depths
                                               count-increases]]))
 
 
 
+(def test-input-day-2
+  '([:forward 5]    ;; 5 0
+    [:down 5]       ;; 5 5
+    [:forward 8]    ;; 13 5
+    [:up 3]         ;; 13 2
+    [:down 8]       ;; 13 10
+    [:forward 2]))  ;; 15 10 
 
+
+(deftest move-sub-test
+  (testing "Moves the sub appropriately"
+    (is (= (move-sub submarine [:forward 5])
+           {:x 5 :y 0}))
+
+    (is (= (move-sub submarine [:down 5])
+           {:x 0 :y 5}))
+
+    (is (= (move-sub submarine [:up 2])
+           {:x 0 :y -2}))))
+
+(deftest follow-map-test
+  (testing "Follows the test map to (15,10)"
+    (is (= (follow-map test-input-day-2 submarine) {:x 15 :y 10}))))
 
 ;;
 ;; Day 1
@@ -28,8 +51,8 @@
   "Test input with 5 increases in consecutive sums of 3 entries."
   [199 200 208 210 200 207 240 269 260 263])
 
- 
- 
+
+
 (deftest count-increases-test
   (testing "Counts increases in test-input correctly"
     (is (= (count-increases test-input) 5))))
