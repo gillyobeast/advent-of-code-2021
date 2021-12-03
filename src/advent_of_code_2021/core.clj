@@ -2,12 +2,12 @@
   (:gen-class)
   (:require   [clojure.data.csv :as csv]))
 
-(declare count-increases input)
+(declare day-2-1-answer)
 
 (defn -main
   "I will tell you the number of increases in that there input.txt file."
   []
-  (println (count-increases input)))
+  (println (day-2-1-answer)))
 
 (def input-txt
   "day-2.txt")
