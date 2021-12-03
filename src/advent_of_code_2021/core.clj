@@ -18,18 +18,42 @@
 ;; Day 3
 ;;
 
-(defn input []
+(defn get-input []
   (map
    #(Integer/parseInt % 2)
    (map first
         (csv/read-csv (slurp input-txt) :separator \n))))
+        
+(def input (get-input))
+
+(defn bits [n s]
+  (reverse
+   (take s
+         (map
+          (fn [i] (bit-and 0x01 i))
+          (iterate
+           (fn [i] (bit-shift-right i 1))
+           n)))))
+
+(defn input-bits [] (map #(bits % 12) input))
+
+(defn add-counts
+  [counts bits]
+  (map + counts bits))
+
+(defn count-set-bits
+  [input]
+  (loop [[x & remaining] input
+         counts (repeat 12 0)]
+    (if (empty? remaining)
+      counts
+      (recur remaining (add-counts counts x)))))
 
 
 (defn gamma
   "returns the gamma rate of the input"
   [input])
 
-;; iterate over the input, counting the number of set bits in each column.
 
 (defn epsilon
   "returns the epsilon rate of the input"
