@@ -21,18 +21,21 @@
 
 
 (def submarine
-  {:x 0 ; horizontal position
-   :y 0 ; depth below origin
+  {:x 0   ; horizontal position
+   :y 0   ; depth below origin
+   :aim 0 ; direction we're pointing 
    })
 
 
 (defn- move-sub-forward [sub distance]
   {:x (+ (:x sub) distance)
-   :y (:y sub)})
+   :y (+ (:y sub) (* (:aim sub) distance))
+   :aim (:aim sub)})
 
 (defn- move-sub-down [sub distance]
   {:x (:x sub)
-   :y (+ (:y sub) distance)})
+   :y (:y sub)
+   :aim (+ (:aim sub) distance)})
 
 (defn move-sub
   "Moves submarine sub distance units in direction direction. Duh."
