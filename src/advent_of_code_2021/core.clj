@@ -17,19 +17,23 @@
 ;;
 ;; Day 3
 ;;
+(def input)
 
+(defn gamma
+  "returns the gamma rate of the input"
+  [input]
+  )
+
+  
+
+(defn epsilon
+  "returns the epsilon rate of the input"
+  [input])
 
 ;;
 ;; Day 2
 ;;
 
-
-(defn parse-directions
-  [[direction distance]]
-  [(keyword direction) (read-string distance)])
-
-(def input
-  (map parse-directions (csv/read-csv (slurp input-txt) :separator \ )))
 
 
 (def submarine

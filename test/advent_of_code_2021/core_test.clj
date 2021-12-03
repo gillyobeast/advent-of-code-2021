@@ -1,13 +1,34 @@
 (ns advent-of-code-2021.core-test
   (:require [clojure.test :refer [deftest testing is]]
-            [advent-of-code-2021.core :refer [move-sub submarine follow-map ;; day 2
+            [advent-of-code-2021.core :refer [gamma epsilon ;; day 3
+                                              move-sub submarine follow-map ;; day 2
                                               count-window compare-depths count-increases ;; day 1
                                               ]]))
-
 
 ;;
 ;; Day 3
 ;;
+
+(def test-input-day-3
+  [00000100
+   00011110
+   00010110
+   00010111
+   00010101
+   00001111
+   00000111
+   00011100
+   00010000
+   00011001
+   00000010
+   00001010])
+
+(deftest gamma-test
+  (testing "gamma works"
+    (is (= (gamma test-input-day-3) 22))))
+(deftest epsilon-test
+  (testing "epsilon works"
+    (is (= (epsilon test-input-day-3) 22))))
 
 
 ;;
