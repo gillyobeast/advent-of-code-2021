@@ -17,18 +17,23 @@
 ;;
 ;; Day 3
 ;;
-(def input)
+(def input (map first (csv/read-csv (slurp input-txt) :separator \n)))
+
 
 (defn gamma
   "returns the gamma rate of the input"
-  [input]
-  )
+  [input])
 
-  
+;; iterate over the input, counting the number of set bits in each column.
 
 (defn epsilon
   "returns the epsilon rate of the input"
   [input])
+
+(defn day-3-answer
+  []
+  (* (gamma input) (epsilon input)))
+
 
 ;;
 ;; Day 2
@@ -39,8 +44,8 @@
 (def submarine
   {:x 0   ; horizontal position
    :y 0   ; depth below origin
-   :aim 0 ; direction we're pointing 
-   })
+   :aim 0}) ; direction we're pointing 
+
 
 
 (defn- move-sub-forward [sub distance]

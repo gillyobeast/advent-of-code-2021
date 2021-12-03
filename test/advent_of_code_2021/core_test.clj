@@ -2,26 +2,26 @@
   (:require [clojure.test :refer [deftest testing is]]
             [advent-of-code-2021.core :refer [gamma epsilon ;; day 3
                                               move-sub submarine follow-map ;; day 2
-                                              count-window compare-depths count-increases ;; day 1
-                                              ]]))
+                                              count-window compare-depths count-increases]])) ;; day 1
+
 
 ;;
 ;; Day 3
 ;;
 
 (def test-input-day-3
-  [00000100
-   00011110
-   00010110
-   00010111
-   00010101
-   00001111
-   00000111
-   00011100
-   00010000
-   00011001
-   00000010
-   00001010])
+  [000000000100
+   000000011110
+   000000010110
+   000000010111
+   000000010101
+   000000001111
+   000000000111
+   000000011100
+   000000010000
+   000000011001
+   000000000010
+   000000001010])
 
 (deftest gamma-test
   (testing "gamma works"
