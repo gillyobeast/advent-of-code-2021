@@ -13,8 +13,8 @@
   "day-2.txt")
 
 (defn parse-directions
-[[direction distance]]
-[(keyword direction) (read-string distance)])
+  [[direction distance]]
+  [(keyword direction) (read-string distance)])
 
 (def input
   (map parse-directions (csv/read-csv (slurp input-txt) :separator \ )))
@@ -38,11 +38,23 @@
 (defn move-sub
   "Moves submarine sub distance units in direction direction. Duh."
   [sub [direction distance]]
+  ;; (println "Moving" sub direction distance)
   (case direction
     :forward (move-sub-forward sub distance)
     :down (move-sub-down sub distance)
     :up (move-sub-down sub (- distance))
     sub))
+
+(defn follow-map
+  [map initial-sub]
+  (loop [[next & remaining-steps] map
+         sub initial-sub]
+    (if (nil? next)
+      sub
+      (do
+        ;; (println sub next (first remaining-steps))
+        (recur remaining-steps (move-sub sub next))))))
+
 
 
 ;; 
