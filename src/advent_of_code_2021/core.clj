@@ -38,7 +38,7 @@
 (defn move-sub
   "Moves submarine sub distance units in direction direction. Duh."
   [sub [direction distance]]
-  ;; (println "Moving" sub direction distance)
+  (comment println "Moving" sub direction distance)
   (case direction
     :forward (move-sub-forward sub distance)
     :down (move-sub-down sub distance)
@@ -52,10 +52,13 @@
     (if (nil? next)
       sub
       (do
-        ;; (println sub next (first remaining-steps))
+        (comment println sub next (first remaining-steps))
         (recur remaining-steps (move-sub sub next))))))
 
-
+(defn day-2-1-answer
+  []
+  (let [sub (follow-map input submarine)]
+    (* (:x sub) (:y sub))))
 
 ;; 
 ;; Day 1 
