@@ -23,7 +23,10 @@
 ;; Day 3
 ;;
 
-(declare parse-binary)
+
+(defn- parse-binary [int]
+  (Integer/parseInt int 2))
+  
 (defn get-input []
   (map
    parse-binary
@@ -32,21 +35,24 @@
 
 (def input (get-input))
 
-(def number-of-bits 5)
+;; (def number-of-bits 5)
 
 ;; to get the actual answer from main, set number-of-bits to 12. Sorry, it's late.
-; (def number-of-bits 12)
+(def number-of-bits 12)
 
-(defn bits [n s]
-  (reverse
-   (take s
-         (map
-          (fn [i] (bit-and 0x01 i))
-          (iterate
-           (fn [i] (bit-shift-right i 1))
-           n)))))
+(defn bits
+  ([n]
+   (bits n number-of-bits))
+  ([n s]
+   (reverse
+    (take s
+          (map
+           (fn [i] (bit-and 0x01 i))
+           (iterate
+            (fn [i] (bit-shift-right i 1))
+            n))))))
 
-(defn get-bits [input] (map #(bits % number-of-bits) input))
+(defn get-bits [input] (map bits input))
 
 (defn add-counts
   [counts bits]
@@ -67,9 +73,13 @@
 
 (defn get-most-common-bit
   [input count]
-  (if (> count (/ (clojure.core/count input) 2))
-    1
-    0))
+  (if (< count (/ (clojure.core/count input) 2))
+    0
+    1))
+
+(defn get-least-common-bit
+  [input count]
+  (- 1 (get-most-common-bit input count)))
 
 (defn get-most-common-bits
   [input]
@@ -77,10 +87,7 @@
 
 (defn get-least-common-bits
   [input]
-  (map #(- 1 %) (get-most-common-bits input)))
-
-(defn- parse-binary [int]
-  (Integer/parseInt int 2))
+  (map #(get-least-common-bit input %) (get-bit-counts input)))
 
 (defn gamma
   "returns the gamma rate of the input"
@@ -98,17 +105,39 @@
   (* (gamma input) (epsilon input)))
 
 
-(defn- calculate-oxy [bits])
+(defn- get-filter
+  "Returns a function that checks if bit 'n' of its input 'int'
+   matches 'criterion' relative to bit-count."
+  [criterion n bit-counts input]
+  (fn [int]
+    (comment println "testing:    " int (bits int))
+    (let [passed (=
+                  (nth (bits int) n)
+                  (criterion input (nth bit-counts n)))]
+      (comment println " passed?:    " passed)
+      passed)))
+
+(defn- find-rating [criterion input]
+  (loop  [[candidate & remaining :as candidates] input
+          n 0
+          bit-counts (get-bit-counts input)]
+    (comment println "candidates:" candidates "column" n "bit-counts" bit-counts)
+    (if (or (empty? remaining) (> n (count bit-counts)))
+      candidate
+      (let [filtered (filter (get-filter criterion n bit-counts candidates) candidates)]
+        (recur
+         filtered
+         (+ n 1)
+         (get-bit-counts filtered))))))
 
 (defn oxygen-rating
   ([] (oxygen-rating input))
-  ([input] (calculate-oxy (get-bits input))))
+  ([input] (find-rating get-most-common-bit input)))
 
-(defn- calculate-co2 [bits])
 
 (defn co2-rating
-  ([] co2-rating input)
-  ([input] (calculate-co2 (get-bits input))))
+  ([] (co2-rating input))
+  ([input] (find-rating get-least-common-bit input)))
 
 
 ;;
