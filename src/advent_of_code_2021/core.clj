@@ -3,12 +3,17 @@
   (:require   [clojure.data.csv :as csv]))
 
 
-(declare day-3-answer)
+(declare power-consumption oxygen-rating co2-rating)
 
 (defn -main
   "I will tell you answer to today's puzzle."
   []
-  (println (day-3-answer)))
+  (println "Power consumption:       " (power-consumption))
+  (let [oxygen-rating (oxygen-rating)
+        co2-rating (co2-rating)]
+    (println "Oxygen generator rating: " oxygen-rating)
+    (println "CO2 Scrubber rating:     " co2-rating)
+    (println "Day 3 part 2 answer:     " (* oxygen-rating co2-rating))))
 
 (def input-txt
   "input/day-3.txt")
@@ -85,9 +90,15 @@
   [input]
   (Integer/parseInt (apply str (get-least-common-bits input)) 2))
 
-(defn day-3-answer
+(defn power-consumption
   []
   (* (gamma input) (epsilon input)))
+
+
+(defn oxygen-rating
+  [])
+(defn co2-rating
+  [])
 
 
 ;;
