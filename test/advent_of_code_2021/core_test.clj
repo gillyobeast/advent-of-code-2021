@@ -1,6 +1,6 @@
 (ns advent-of-code-2021.core-test
   (:require [clojure.test :refer [deftest testing is]]
-            [advent-of-code-2021.core :refer [gamma epsilon ;; day 3
+            [advent-of-code-2021.core :refer [gamma epsilon oxygen-rating co2-rating;; day 3
                                               move-sub submarine follow-map ;; day 2
                                               count-window compare-depths count-increases]])) ;; day 1
 
@@ -30,6 +30,12 @@
   (testing "epsilon works"
     (is (= (epsilon test-input-day-3) 9))))
 
+(deftest oxy-test
+  (testing "calculate oxygen rating"
+    (is (= (oxygen-rating test-input-day-3) 23))))
+(deftest co2-test
+  (testing "calculate CO2 rating"
+    (is (= (co2-rating test-input-day-3) 10))))
 
 ;;
 ;; Day 2
