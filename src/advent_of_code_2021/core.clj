@@ -23,9 +23,10 @@
 ;; Day 3
 ;;
 
+(declare parse-binary)
 (defn get-input []
   (map
-   #(Integer/parseInt % 2)
+   parse-binary
    (map first
         (csv/read-csv (slurp input-txt) :separator \n))))
 
@@ -45,7 +46,7 @@
            (fn [i] (bit-shift-right i 1))
            n)))))
 
-(defn input-bits [input] (map #(bits % number-of-bits) input))
+(defn get-bits [input] (map #(bits % number-of-bits) input))
 
 (defn add-counts
   [counts bits]
@@ -62,7 +63,7 @@
 
 (defn get-bit-counts
   [input]
-  (count-set-bits (input-bits input)))
+  (count-set-bits (get-bits input)))
 
 (defn get-most-common-bit
   [input count]
@@ -78,27 +79,36 @@
   [input]
   (map #(- 1 %) (get-most-common-bits input)))
 
+(defn- parse-binary [int]
+  (Integer/parseInt int 2))
 
 (defn gamma
   "returns the gamma rate of the input"
   [input]
-  (Integer/parseInt (apply str (get-most-common-bits input)) 2))
+  (parse-binary (apply str (get-most-common-bits input))))
 
 
 (defn epsilon
   "returns the epsilon rate of the input"
   [input]
-  (Integer/parseInt (apply str (get-least-common-bits input)) 2))
+  (parse-binary (apply str (get-least-common-bits input))))
 
 (defn power-consumption
   []
   (* (gamma input) (epsilon input)))
 
 
+(defn- calculate-oxy [bits])
+
 (defn oxygen-rating
-  [])
+  ([] (oxygen-rating input))
+  ([input] (calculate-oxy (get-bits input))))
+
+(defn- calculate-co2 [bits])
+
 (defn co2-rating
-  [])
+  ([] co2-rating input)
+  ([input] (calculate-co2 (get-bits input))))
 
 
 ;;
