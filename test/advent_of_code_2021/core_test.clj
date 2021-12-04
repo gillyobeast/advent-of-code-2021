@@ -10,25 +10,25 @@
 ;;
 
 (def test-input-day-3
-  ["000000000100"
-   "000000011110"
-   "000000010110"
-   "000000010111"
-   "000000010101"
-   "000000001111"
-   "000000000111"
-   "000000011100"
-   "000000010000"
-   "000000011001"
-   "000000000010"
-   "000000001010"])
+  [2r00100
+   2r11110
+   2r10110
+   2r10111
+   2r10101
+   2r01111
+   2r00111
+   2r11100
+   2r10000
+   2r11001
+   2r00010
+   2r01010])
 
 (deftest gamma-test
   (testing "gamma works"
     (is (= (gamma test-input-day-3) 22))))
 (deftest epsilon-test
   (testing "epsilon works"
-    (is (= (epsilon test-input-day-3) 22))))
+    (is (= (epsilon test-input-day-3) 9))))
 
 
 ;;

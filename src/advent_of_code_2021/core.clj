@@ -25,6 +25,7 @@
         (csv/read-csv (slurp input-txt) :separator \n))))
 
 (def input (get-input))
+(def number-of-bits 5)
 
 (defn bits [n s]
   (reverse
@@ -35,7 +36,7 @@
            (fn [i] (bit-shift-right i 1))
            n)))))
 
-(defn input-bits [] (map #(bits % 12) input))
+(defn input-bits [input] (map #(bits % number-of-bits) input))
 
 (defn add-counts
   [counts bits]
@@ -44,20 +45,41 @@
 (defn count-set-bits
   [input]
   (loop [[x & remaining] input
-         counts (repeat 12 0)]
-    (if (empty? remaining)
+         counts (repeat number-of-bits 0)]
+    (comment println x counts)
+    (if (nil? x)
       counts
       (recur remaining (add-counts counts x)))))
+
+(defn get-bit-counts
+  [input]
+  (count-set-bits (input-bits input)))
+
+(defn get-most-common-bit
+  [input count]
+  (if (> count (/ (clojure.core/count input) 2))
+    1
+    0))
+
+(defn get-most-common-bits
+  [input]
+  (map #(get-most-common-bit input %) (get-bit-counts input)))
+
+(defn get-least-common-bits
+  [input]
+  (map #(- 1 %) (get-most-common-bits input)))
 
 
 (defn gamma
   "returns the gamma rate of the input"
-  [input])
+  [input]
+  (Integer/parseInt (apply str (get-most-common-bits input)) 2))
 
 
 (defn epsilon
   "returns the epsilon rate of the input"
-  [input])
+  [input]
+  (Integer/parseInt (apply str (get-least-common-bits input)) 2))
 
 (defn day-3-answer
   []
