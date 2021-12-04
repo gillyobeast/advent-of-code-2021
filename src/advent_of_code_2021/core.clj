@@ -25,7 +25,11 @@
         (csv/read-csv (slurp input-txt) :separator \n))))
 
 (def input (get-input))
+
 (def number-of-bits 5)
+
+;; to get the actual answer from main, set number-of-bits to 12. Sorry, it's late.
+; (def number-of-bits 12)
 
 (defn bits [n s]
   (reverse
