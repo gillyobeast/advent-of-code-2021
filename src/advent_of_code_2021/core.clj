@@ -11,7 +11,7 @@
   (println (day-3-answer)))
 
 (def input-txt
-  "day-3.txt")
+  "input/day-3.txt")
 
 
 ;;
@@ -23,7 +23,7 @@
    #(Integer/parseInt % 2)
    (map first
         (csv/read-csv (slurp input-txt) :separator \n))))
-        
+
 (def input (get-input))
 
 (defn bits [n s]
